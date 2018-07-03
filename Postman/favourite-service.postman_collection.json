@@ -1,0 +1,32 @@
+{
+	"info": {
+		"_postman_id": "161fce52-6043-4558-b83b-4b98a1ea1ead",
+		"name": "favourite-service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "basic statement",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:9000/users/19889/favouriteStudios/123499933",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"users",
+						"19889",
+						"favouriteStudios",
+						"123499933"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
