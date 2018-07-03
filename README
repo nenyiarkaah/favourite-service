@@ -1,2 +1,11 @@
 An extended introduction to writing microservices with Scala and Play.
+Taken from Toby Sullivan's APIs and Microservices with Scala and Play Tutorial
+https://www.youtube.com/watch?v=jaZIilhjcDw&t=2140s
 This is a practice run through a talk I'm giving at Applicative Conf in NYC on Friday.
+This is an abridge version just focusing on getting the microservice running.
+For the mysql database I am using a docker container.
+The command is `docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=password -d mysql`
+And to access the database
+url: jdbc:mysql://localhost:3306/mysql
+user: root
+password: password
