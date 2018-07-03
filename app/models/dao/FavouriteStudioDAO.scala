@@ -6,15 +6,17 @@ import play.api.db._
 import anorm.SqlParser.get
 
 object FavouriteStudioDAO {
+
+  val database = Databases(
+    driver = "com.mysql.jdbc.Driver",
+    url = "jdbc:mysql://localhost:3306/mysql",
+    name = "mysql",
+    config = Map(
+      "user" -> "root",
+      "password" -> "password")
+  )
+
   def create(favouriteStudio: FavouriteStudio) = {
-    val database = Databases(
-      driver = "com.mysql.jdbc.Driver",
-      url = "jdbc:mysql://localhost:3306/mysql",
-      name = "mysql",
-      config = Map(
-        "user" -> "root",
-        "password" -> "password")
-    )
     database.withConnection { implicit c =>
       val id: Option[Long] = SQL("INSERT IGNORE INTO `favouriteStudio` (`userId`, `studioId`)  VALUES({userId},  {studioId})")
         .on('userId -> favouriteStudio.userId, 'studioId -> favouriteStudio.studioId)
@@ -24,14 +26,6 @@ object FavouriteStudioDAO {
 
 
   def delete(favouriteStudio: FavouriteStudio) = {
-    val database = Databases(
-      driver = "com.mysql.jdbc.Driver",
-      url = "jdbc:mysql://localhost:3306/mysql",
-      name = "mysql",
-      config = Map(
-        "user" -> "root",
-        "password" -> "password")
-    )
     database.withConnection { implicit c =>
       SQL("DELETE FROM `favouriteStudio` WHERE `userId`={userId} AND `studioId`={studioId}")
         .on('userId -> favouriteStudio.userId, 'studioId -> favouriteStudio.studioId)
@@ -40,14 +34,6 @@ object FavouriteStudioDAO {
   }
 
   def exists(favouriteStudio: FavouriteStudio) = {
-    val database = Databases(
-      driver = "com.mysql.jdbc.Driver",
-      url = "jdbc:mysql://localhost:3306/mysql",
-      name = "mysql",
-      config = Map(
-        "user" -> "root",
-        "password" -> "password")
-    )
     database.withConnection { implicit c =>
       val result = SQL("SELECT COUNT(*) AS numMatches FROM `favouriteStudio` WHERE `userId`={userId} AND `studioId`={studioId};")
         .on('userId -> favouriteStudio.userId, 'studioId -> favouriteStudio.studioId)
@@ -57,14 +43,6 @@ object FavouriteStudioDAO {
   }
 
   def index(userId: Int) = {
-    val database = Databases(
-      driver = "com.mysql.jdbc.Driver",
-      url = "jdbc:mysql://localhost:3306/mysql",
-      name = "mysql",
-      config = Map(
-        "user" -> "root",
-        "password" -> "password")
-    )
     database.withConnection { implicit c =>
       val rowParser: RowParser[FavouriteStudio] = {
         get[Int]("userId") ~
@@ -77,6 +55,4 @@ object FavouriteStudioDAO {
         .as(rowParser *)
     }
   }
-
-  def find
 }
